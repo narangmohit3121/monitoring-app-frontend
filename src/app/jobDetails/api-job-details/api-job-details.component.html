@@ -1,0 +1,31 @@
+<div class="row">
+    <ng-container *ngFor="let currentFeature of currentJobFeatureSummary | keyvalue; let i = index">
+        <div class="col-md-4">
+            <table *ngIf="currentJobFeatureSummary != undefined" class="table border table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th class="text-center text-primary  border border-primary">FEATURE : {{currentFeature.key |
+                            uppercase}} </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let scenario of currentFeature.value.scenarios">
+                        <td [ngClass]="{failed: scenario.status == 'failed'}"> {{ scenario.scenarioName }} </td>
+
+                        <!-- <td> {{ scenario.status }} </td> -->
+
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div *ngIf="(i+1)%3 == 0" class="row">
+        </div>
+        <hr *ngIf="(i+1)%3 == 0">
+    </ng-container>
+
+
+
+</div>

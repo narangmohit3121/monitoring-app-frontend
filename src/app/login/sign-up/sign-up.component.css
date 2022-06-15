@@ -1,0 +1,18 @@
+h1{
+  color : #42a5f5;
+}
+
+.errorMessage{
+    color: #b71c1c;
+}
+
+.lineStyle { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+ 

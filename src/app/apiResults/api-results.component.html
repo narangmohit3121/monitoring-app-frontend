@@ -1,0 +1,28 @@
+<h3 class="text-left">
+    API Automation Job Results
+</h3>
+<form id="filterApiJobs">
+    <label> Search from API jobs</label>
+    <br />
+    <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+    <input type="text" name="apiFilter" [(ngModel)]="filterValue" />
+</form>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="list-group">
+            <li *ngFor="let job of apiJobs | filter : filterValue" class="list-group-item">
+                <a [routerLink]="['/apiResults',job]" routerLinkActive="router-link-active">
+                    <span class="text-center"> {{ job }}</span>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-10">
+        <div class="bar" [chart]="barchart"></div>
+    </div>
+</div>

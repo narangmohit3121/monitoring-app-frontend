@@ -1,0 +1,61 @@
+<div class="jumbotron text-center">
+    <h1>Sign Up</h1>
+    <!-- <p> Please provide the required details</p> -->
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3">
+        <form class="text-center jumbotron" (ngSubmit)="onSubmit()" #userForm="ngForm">
+            <div class="form-group">
+
+                <Label for="username"> Username</Label>
+                <input type="text" name="username" class="form-control text-center" ngModel required />
+
+                <Label for="password"> Password </Label>
+                <input type="text" name="password" class="form-control text-center" ngModel required />
+
+                <Label for="confirmPassword">Confirm Password</Label>
+                <input type="text" name="confirmPassword" class="form-control text-center" ngModel required />
+
+                <p class="errorMessage" *ngIf="(userForm.value.password != userForm.value.confirmPassword)">
+                    Password and Confirm Password do not match
+                </p>
+
+                <Label for="email">Email</Label>
+                <input type="text" name="email" class="form-control text-center" ngModel required email />
+                <hr>
+                <button
+                    [disabled]="userForm.form.status === 'INVALID' || (userForm.value.password != userForm.value.confirmPassword)"
+                    type="submit" class="btn btn-primary btn-lg">
+                    Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="lineStyle">
+
+<div class="row" *ngIf="!confirmUser">
+    <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3 text-center">
+        <button class="btn btn-default btn-lg" (click)="onDoConfirm()">Confirm User</button>
+    </div>
+</div>
+<div class="row" *ngIf="confirmUser">
+    <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3">
+        <form class="text-center jumbotron" (ngSubmit)="onConfirm()" #confirmForm="ngForm">
+            <div class="form-group">
+
+                <Label for="username"> Username</Label>
+                <input type="text" name="username" class="form-control text-center" ngModel required />
+
+
+                <Label for="confirmPassword">Confirmation Code</Label>
+                <input type="text" name="confirmPassword" class="form-control text-center" ngModel required />
+
+                <hr>
+                <button [disabled]="confirmForm.form.status === 'INVALID'" type="submit" class="btn btn-primary btn-lg">
+                    Confirm </button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <Label for="username"></Label>
+    <input type="text" name="username" /></form> -->

@@ -1,0 +1,58 @@
+<div class="jumbotron text-center">
+    <h1>Sign In</h1>
+    <!-- <p> Please provide the required details</p> -->
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3">
+        <form class="text-center jumbotron" (ngSubmit)="onSubmit()" #siginInForm="ngForm">
+            <div class="form-group">
+
+                <Label for="username"> Username</Label>
+                <input type="text" name="username" class="form-control text-center" ngModel required />
+
+                <Label for="password"> Password </Label>
+                <input type="text" name="password" class="form-control text-center" ngModel required />
+
+
+
+                <!-- <p class="errorMessage" *ngIf="(siginInForm.value.password != siginInForm.value.confirmPassword)">
+                Password and Confirm Password do not match
+            </p> -->
+
+
+                <hr>
+                <button [disabled]="siginInForm.form.status === 'INVALID'" type="submit" class="btn btn-primary btn-lg">
+                    Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="userToSetNewPassword" class="row">
+    <div class="col-xs-12 col-sm-10 col-md-6 cold-sm-offset-1 col-md-offset-3">
+        <form class="text-center jumbotron" (ngSubmit)="setNewPassword()" #setPasswordForm="ngForm">
+            <div class="form-group">
+
+                <Label for="newPassword"> New password</Label>
+                <input type="text" name="newPassword" class="form-control text-center" ngModel required />
+
+                <!-- <Label for="password"> Password </Label>
+                <input type="text" name="password" class="form-control text-center" ngModel required /> -->
+
+
+
+                <!-- <p class="errorMessage" *ngIf="(siginInForm.value.password != siginInForm.value.confirmPassword)">
+                Password and Confirm Password do not match
+            </p> -->
+
+
+                <hr>
+                <button [disabled]="setPasswordForm.form.status === 'INVALID'" type="submit"
+                    class="btn btn-primary btn-lg">
+                    Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
