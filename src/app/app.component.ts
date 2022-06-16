@@ -1,4 +1,5 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from './Login.service';
 
@@ -13,10 +14,10 @@ export class AppComponent implements OnChanges, OnInit, OnDestroy {
   tabs: string[] = ["apiResults", "functionalResults"]
   currentTab: string = "";
   isApiTabSelected: boolean = true;
-  isUserAuthenticated: boolean = true;
+  isUserAuthenticated: boolean = false;
   userAuthSubscription: Subscription;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
 
   }
 
@@ -27,8 +28,14 @@ export class AppComponent implements OnChanges, OnInit, OnDestroy {
   ngOnInit(): void {
     this.userAuthSubscription = this.loginService.isUserLoggedIn.subscribe((isloginSucessful) => {
       console.log('Inside subscription for authentication in App component')
-      // this.isUserAuthenticated = isloginSucessful;
+      this.isUserAuthenticated = isloginSucessful;
+      if (isloginSucessful) {
+        console.log(isloginSucessful);
+        console.log('Authentication successful');
+        this.router.navigate(['/functionalResults']);
+      }
     })
+    this.isUserAuthenticated = true;
   }
 
   selectedTab(event: Event, tabName: string) {

@@ -1,34 +1,36 @@
 import { Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 import { donutChartOptions } from 'src/app/helpers/donutChartOptions';
 import { Options } from 'highcharts';
-import { APIJobResults, MonitoringService, PastJobResults } from 'src/app/Monitoring.service';
+import { FeatureSummary, FunctionalJobResults, MonitoringService, PastJobResults } from 'src/app/Monitoring.service';
 import { Subscription } from 'rxjs';
 import { AlertComponent } from '../../helpers/alert/alert.component';
 import { PlaceholderDirective } from '../../helpers/alert/placeholder.directive';
 
 @Component({
-  selector: 'app-api-result',
-  templateUrl: './api-result.component.html',
-  styleUrls: ['./api-result.component.css']
+  selector: 'app-functional-result',
+  templateUrl: './functional-result.component.html',
+  styleUrls: ['./functional-result.component.css']
 })
-export class ApiResultComponent implements OnInit, OnDestroy {
+export class FunctionalResultComponent implements OnInit {
 
   jobName: string = "";
   chart = new Chart(donutChartOptions);
-  pastResultsChart: Chart = null;
   // chart2: Chart = null;
   // chart3: Chart = null;
-  jobResults: APIJobResults;
+  jobResults: FunctionalJobResults;
   paramSubscription: Subscription
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
   closeAlertSub: Subscription;
   failureTableColumns: string[] = [];
+  pastResultsChart: Chart = null;
 
 
   constructor(private activatedRoute: ActivatedRoute,
-    private monitoringService: MonitoringService, private componentFactoryResolver: ComponentFactoryResolver) { }
+    private router: Router,
+    private monitoringService: MonitoringService,
+    private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit(): void {
     this.paramSubscription = this.activatedRoute.params.subscribe((params) => {
@@ -36,15 +38,11 @@ export class ApiResultComponent implements OnInit, OnDestroy {
       console.log(`Displaying the results of ${this.jobName}`);
     })
 
-    this.monitoringService.getApiJobResult(this.jobName.replaceAll(" ", "_")).
+    this.monitoringService.getFunctionalJobResult(this.jobName.replaceAll(" ", "_")).
       subscribe((result) => {
         console.log(result)
         this.jobResults = result.data;
-        // this.failureTableColumns = Object.keys(this.jobResults.failures[0]);
-        for (let key in this.jobResults.failures[0]) {
-          this.failureTableColumns.push(key);
-        }
-        this.monitoringService.currentFeatureDetails.next(this.jobResults.collectionSummary);
+
 
         let updatedChart: Options = {
           chart: {
@@ -98,6 +96,7 @@ export class ApiResultComponent implements OnInit, OnDestroy {
         // this.chart2 = new Chart(updatedChart)
         // this.chart3 = new Chart(updatedChart)
       });
+
     this.monitoringService.getPastFunctionalJobResults(this.jobName.replaceAll(" ", "_")).
       subscribe((pastJobResults) => {
         let pastJobResultData: PastJobResults = pastJobResults.data;
@@ -163,6 +162,10 @@ export class ApiResultComponent implements OnInit, OnDestroy {
       })
   }
 
+  viewJobFeatures() {
+    this.monitoringService.currentFeatureDetails.next(this.jobResults.featureSummary);
+    this.router.navigate(['/functionalJobDetail']);
+  }
 
   showError(errorMessage: string) {
     console.log(errorMessage);

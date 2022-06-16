@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Chart } from "angular-highcharts";
 import * as Highcharts from "highcharts";
 import { Options } from "highcharts";
-import { MonitoringService } from "../Monitoring.service";
-import { AllApiJobResults } from "../Monitoring.service";
+import { MonitoringService } from "../../Monitoring.service";
+import { AllApiJobResults } from "../../Monitoring.service";
 
 export interface ApiJobResult {
     name: string,
@@ -105,12 +105,12 @@ export class ApiResults implements OnInit {
                 series: [{
                     name: 'Failed',
                     type: 'column',
-                    color: "#ffab91",
+                    color: "#fff59d",
                     data: failedValues
                 }, {
                     name: 'Passed',
                     type: 'column',
-                    color: "#a5d6a7",
+                    color: "#4285F4",
                     data: passedValues
                 },
                 ]

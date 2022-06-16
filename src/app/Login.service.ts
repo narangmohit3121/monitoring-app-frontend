@@ -17,7 +17,7 @@ export class LoginService {
     userAttributes: any;
     cognitoUser: CognitoUser;
 
-    verifySignIn(username: string, password: string): boolean {
+    verifySignIn(username: string, password: string): void {
         console.log(username);
         console.log(password);
         let authData = {
@@ -39,8 +39,9 @@ export class LoginService {
                 that.isUserLoggedIn.next(true);
             },
             onFailure(err) {
+                console.log('Authentication Failed');
                 console.log(err)
-                that.isUserLoggedIn.next(true);
+                that.isUserLoggedIn.next(false);
             },
             newPasswordRequired: function (userAttributes, requiredAttributes) {
 
@@ -54,7 +55,6 @@ export class LoginService {
                 that.userAttributes = userAttributes;
             }
         })
-        return true;
     }
 
     setNewPassword(newPassword: string) {

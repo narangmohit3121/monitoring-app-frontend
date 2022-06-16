@@ -1,3 +1,28 @@
-<div>
-    This is Functional RESULTS component
+<h3 class="text-left">
+    Functional Automation Job Results
+</h3>
+<form id="filterFunctionalJobs">
+    <label> Search from Functional jobs</label>
+    <br />
+    <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+    <input type="text" name="functionalFilter" [(ngModel)]="filterValue" />
+</form>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="list-group">
+            <li *ngFor="let job of functionalJobs | filter : filterValue" class="list-group-item">
+                <a [routerLink]="['/functionalResults',job]" routerLinkActive="router-link-active">
+                    <span class="text-center"> {{ job }}</span>
+                </a>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-10">
+        <div class="bar" [chart]="barchart"></div>
+    </div>
 </div>

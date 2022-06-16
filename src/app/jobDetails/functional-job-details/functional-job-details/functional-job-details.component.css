@@ -1,9 +1,9 @@
 .passed {
-    background-color: #618685;
+    background-color: rgba(83, 187, 128, 0.721);
 }
 
 .failed {
-    background-color: #fae596
+    background-color: rgba(228, 139, 139, 0.639);
 }
 
 hr {
@@ -25,9 +25,9 @@ div~hr {
 }
 
 .table-bordered thead {
-    border: 3px solid#4285F4
+    border: 3px solid#212121
 }
 
 .table-bordered td {
-    border: 1px solid#4285F4
+    border: 1px solid#212121
 }

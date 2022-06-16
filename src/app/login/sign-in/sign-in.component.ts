@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/Login.service';
-import { MonitoringService } from 'src/app/Monitoring.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -26,15 +25,17 @@ export class SignInComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.signInForm);
-    let isSignInSuccessful: boolean =
-      this.loginService.verifySignIn(this.signInForm.form.value.username,
-        this.signInForm.form.value.password);
+    // console.log(this.signInForm);
+    // let isSignInSuccessful: boolean =
+    //   this.loginService.verifySignIn(this.signInForm.form.value.username,
+    //     this.signInForm.form.value.password);
 
-    this.loginService.isUserLoggedIn.next(isSignInSuccessful);
+    // this.loginService.isUserLoggedIn.next(isSignInSuccessful);
     // if (isSignInSuccessful) {
     //   this.router.navigate(['functionalResults']);
     // }
+    this.loginService.verifySignIn(this.signInForm.form.value.username,
+      this.signInForm.form.value.password);
 
   }
 

@@ -1,0 +1,45 @@
+/* app-api-result {
+    background-color: lightblue
+  } */
+
+/* .vl {
+    border-left: 6px solid darkgrey;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  } */
+
+.pull-left {
+  border-right: 6px solid darkgrey;
+}
+
+thead,
+thead th {
+  /* background-color: grey; */
+  border: 1px solid black;
+}
+
+table tbody tr {
+  border: 1px solid black;
+}
+
+.error-text {
+  overflow-wrap: break-word;
+}
+
+.spacer {
+  padding-top: 40px;
+  padding-bottom: 40px
+}
+
+/* button {
+    margin: 20px;
+    display: inline-block;
+  } */
+
+/* table {
+    table-layout: fixed;
+    word-wrap: break-word;
+  } */

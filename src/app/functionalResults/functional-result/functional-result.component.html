@@ -8,13 +8,13 @@
             LATEST JOB RESULT
         </h2>
         <div class="text-center">
-            <button class="btn btn-primary btn-md" [routerLink]="['/apiJobDetail']"
-                routerLinkActive="router-link-active">
+            <button class="btn btn-primary btn-md" (click)="viewJobFeatures()" routerLinkActive="router-link-active">
                 View Job Scenarios</button>
         </div>
 
 
         <div class="pie" [chart]="chart"></div>
+
 
     </div>
     <div class="vl"></div>
@@ -23,20 +23,27 @@
             PAST JOB RESULTS
         </h2>
         <!-- <div class="row">
-                <div class="col-md-6">
-                    <div class="pie" [chart]="chart2"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="pie" [chart]="chart3"></div>
-                </div>
-            </div> -->
+                    <div class="col-md-6">
+                        <div class="pie" [chart]="chart2"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pie" [chart]="chart3"></div>
+                    </div>
+                </div> -->
         <!-- <div class="pie" [chart]="chart2"></div>
         <div class="pie" [chart]="chart3"></div> -->
         <div class="line" [chart]="pastResultsChart"></div>
+
     </div>
 </div>
+
+<hr>
 <div class="row">
-    <div class="col-md-4">
+    <div class="spacer"></div>
+    <h2 class="text-center text-primary">
+        LATEST JOB SUMMARY
+    </h2>
+    <div class="col-md-6">
         <table *ngIf="jobResults != undefined" class="table table-bordered text-center">
             <thead>
                 <tr>
@@ -48,34 +55,33 @@
             </thead>
             <tbody>
 
-                <tr class="border" *ngFor="let summaryItem of jobResults.collectionSummary | keyvalue">
-                    <td> {{ summaryItem.key | ReplaceUnderscore }} </td>
+                <tr class="border" *ngFor="let summaryItem of jobResults.featureSummary | keyvalue">
+                    <td> {{ summaryItem.key }} </td>
                     <!-- <td> {{ summaryItem.value.passed }} </td>
-                    <td> {{ summaryItem.value.failed }} </td> -->
-                    <td> {{ summaryItem.value.passed }} </td>
-                    <td> {{ summaryItem.value.failed }} </td>
+                        <td> {{ summaryItem.value.failed }} </td> -->
+                    <td> {{ summaryItem.value.resultSummary.passed }} </td>
+                    <td> {{ summaryItem.value.resultSummary.failed }} </td>
 
                 </tr>
             </tbody>
 
         </table>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6">
         <table *ngIf="jobResults != undefined" class="table table-striped table-bordered text-center">
-
             <thead>
                 <tr>
-                    <th *ngFor="let failureDetailKey of failureTableColumns" class="text-center text-danger">
-                        {{failureDetailKey}}</th>
+                    <th class="text-center text-danger">Failed Scenarios</th>
+
                 </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let failedScenario of jobResults.failures; let i = index">
+                <ng-container *ngFor="let failedScenario of jobResults.failedScenarios; let i = index">
                     <tr>
-                        <!-- <td>
+
+                        <td>
                             <button class="btn btn-default btn-xs" data-toggle="collapse"
-                                attr.data-target="{{'#errorText' + i }}"
-                                (click)="showError(failedScenario.error)"> Show
+                                attr.data-target="{{'#errorText' + i }}" (click)="showError(failedScenario.error)"> Show
                                 Error</button>
                             {{ failedScenario.name }}
 
@@ -83,12 +89,19 @@
                                 <p class="text-wrap error-text">{{ failedScenario.error }}</p>
 
                             </div>
-                        </td> -->
-                        <td *ngFor="let failureDetail of failedScenario| keyvalue">
-                            {{ failureDetail.value}}
                         </td>
+                        <!-- <span
+                                        class="glyphicon glyphicon-eye-open"></span> -->
                     </tr>
+                    <!-- <tr class="collapse" attr.id="{{'errorText' + i }}">
 
+
+                            <td>
+                                <div>
+                                    {{ failedScenario.error }}
+                                </div>
+                            </td>
+                        </tr> -->
                 </ng-container>
 
             </tbody>
@@ -97,4 +110,5 @@
     </div>
 
 </div>
+
 <ng-container appPlaceholder></ng-container>

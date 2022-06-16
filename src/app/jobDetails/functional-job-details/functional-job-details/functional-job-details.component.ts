@@ -3,11 +3,12 @@ import { Subscription } from 'rxjs';
 import { MonitoringService } from 'src/app/Monitoring.service';
 
 @Component({
-  selector: 'app-api-job-details',
-  templateUrl: './api-job-details.component.html',
-  styleUrls: ['./api-job-details.component.css']
+  selector: 'app-functional-job-details',
+  templateUrl: './functional-job-details.component.html',
+  styleUrls: ['./functional-job-details.component.css']
 })
-export class ApiJobDetailsComponent implements OnInit, OnDestroy {
+export class FunctionalJobDetailsComponent implements OnInit, OnDestroy {
+
   currentJobFeatureSummary: any;
   featureDetailsSub: Subscription;
 
@@ -16,7 +17,6 @@ export class ApiJobDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.featureDetailsSub = this.monitoringService.currentFeatureDetails.subscribe((apiFeatureSummary) => {
       this.currentJobFeatureSummary = apiFeatureSummary;
-
     })
   }
 
